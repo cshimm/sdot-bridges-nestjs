@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
 import { BridgesModule } from './bridges/bridges.module';
 
 @Module({
-  imports: [BridgesModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    BridgesModule,
+    MongooseModule.forRoot(process.env.MONGODB_URI),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
