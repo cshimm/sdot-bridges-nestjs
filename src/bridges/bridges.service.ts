@@ -48,38 +48,11 @@ export class BridgesService implements OnModuleInit, OnModuleDestroy {
                 .catch(err => console.error(err));
             } else if (bridge.Status && bridge.Status === "Open" && bridges[0].status !== "Open") {
               console.log("Bridge Open:", bridges[0].name);
-              this.updateBridge(bridge, { lastOpen: Date.now(), status: bridge.Status });
-              // this.bridgeModel.findOneAndUpdate(
-              //   { name: bridge.DisplayName },
-              //   { $set: { lastOpen: Date.now(), status: bridge.Status } },
-              //   { new: true }
-              // ).then(updatedDocument => {
-              //   if (!updatedDocument) {
-              //     console.log("Document not found.");
-              //     return;
-              //   }
-              //   console.log("Document updated successfully:", updatedDocument);
-              // })
-              //   .catch(err => {
-              //     console.error("Error updating document:", err);
-              //   });
+              console.log("open", Date.now())
+              this.updateBridge(bridge, { lastOpen: Date.now() });
             } else if (bridge.Status && bridge.Status === "Closed" && bridges[0].status !== "Closed") {
-              this.updateBridge(bridge, { status: bridge.Status, lastClosed: Date.now() });
-              // this.bridgeModel.findOneAndUpdate(
-              //   { name: bridge.DisplayName },
-              //   { $set: { status: bridge.Status, lastClosed: Date.now() } },
-              //   { new: true }
-              // )
-              //   .then(updatedDocument => {
-              //     if (!updatedDocument) {
-              //       console.log("Document not found.");
-              //       return;
-              //     }
-              //     console.log("Document updated successfully:", updatedDocument);
-              //   })
-              //   .catch(err => {
-              //     console.error("Error updating document:", err);
-              //   });
+              console.log("closed", Date.now())
+              this.updateBridge(bridge, { lastClosed: Date.now() });
             }
           })
           .catch(err => {
@@ -111,20 +84,20 @@ export class BridgesService implements OnModuleInit, OnModuleDestroy {
   }
 
   async updateBridge(bridge: any, updateObject: AnyObject) {
-    this.bridgeModel.findOneAndUpdate(
-      { name: bridge.DisplayName },
-      { $set: updateObject },
-      { new: true }
-    )
-      .then(updatedDocument => {
-        if (!updatedDocument) {
-          console.log("Document not found.");
-          return;
-        }
-        console.log("Document updated successfully:", updatedDocument);
-      })
-      .catch(err => {
-        console.error("Error updating document:", err);
-      });
+    try {
+      const updatedDocument = await this.bridgeModel.findOneAndUpdate(
+        { name: bridge.DisplayName },
+        { $set: { ...updateObject, status: bridge.Status } },
+        { new: true }
+      );
+
+      if (!updatedDocument) {
+        console.log("Document not found.");
+        return;
+      }
+      console.log("Document updated successfully:", updatedDocument);
+    } catch (err) {
+      console.error("Error updating document:", err);
+    }
   }
 }

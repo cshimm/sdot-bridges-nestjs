@@ -7,7 +7,7 @@ export class Bridge {
   @Prop()
   status: string;
   @Prop()
-  lastOpened: Date;
+  lastOpen: Date;
   @Prop()
   lastClosed: Date;
 }
