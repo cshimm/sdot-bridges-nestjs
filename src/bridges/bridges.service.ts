@@ -12,8 +12,8 @@ export class BridgesService implements OnModuleInit, OnModuleDestroy {
   }
 
   private intervalId: NodeJS.Timeout;
-  private timeout = 20000;
-  private url = "https://web.seattle.gov/Travelers/api/Map/GetBridgeData";
+  private readonly timeout = 20000;
+  private readonly url = "https://web.seattle.gov/Travelers/api/Map/GetBridgeData";
 
   onModuleDestroy(): any {
     clearInterval(this.intervalId);
@@ -48,10 +48,8 @@ export class BridgesService implements OnModuleInit, OnModuleDestroy {
                 .catch(err => console.error(err));
             } else if (bridge.Status && bridge.Status === "Open" && bridges[0].status !== "Open") {
               console.log("Bridge Open:", bridges[0].name);
-              console.log("open", Date.now())
               this.updateBridge(bridge, { lastOpen: Date.now() });
             } else if (bridge.Status && bridge.Status === "Closed" && bridges[0].status !== "Closed") {
-              console.log("closed", Date.now())
               this.updateBridge(bridge, { lastClosed: Date.now() });
             }
           })
