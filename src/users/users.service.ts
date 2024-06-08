@@ -42,7 +42,6 @@ export class UsersService {
     let user: UserDocument;
     try {
       user = await this.userModel.findOne({ email: email }).exec();
-      console.log(user);
     } catch (error) {
       throw new HttpException('User not found!', 404);
     }
