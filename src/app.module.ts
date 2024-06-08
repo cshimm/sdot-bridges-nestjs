@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { BridgesModule } from './bridges/bridges.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { BridgesModule } from './bridges/bridges.module';
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
     BridgesModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
