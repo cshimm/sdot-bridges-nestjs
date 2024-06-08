@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
 export class Bridge {
-  @Prop()
+  @Prop( { required: true })
   name: string;
   @Prop()
   status: string;
