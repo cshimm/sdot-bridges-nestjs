@@ -31,7 +31,6 @@ export class BridgesService implements OnModuleInit, OnModuleDestroy {
   }
 
   private async checkBridges() {
-    console.log("checking bridges....");
     try {
       const response = await fetch(this.url);
       const responseData = await response.json();
