@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional, IsString } from "class-validator";
+import { IsArray, IsEnum, IsOptional, IsString } from "class-validator";
 import { Role } from "../schemas/user.model";
 
 export class UpdateUserDto {
@@ -17,6 +17,10 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   readonly password: string;
+  
+  @IsOptional()
+  @IsArray()
+  readonly favorites: string[];
 
   @IsOptional()
   @IsEnum(Role)

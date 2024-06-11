@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { IsArray, IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 import { Role } from "../schema/userAuth.model";
 
 export class SignupDto {
@@ -22,4 +22,8 @@ export class SignupDto {
   @IsNotEmpty()
   @IsString()
   readonly role: Role;
+
+  @IsNotEmpty()
+  @IsArray()
+  readonly favorites: string[];
 }

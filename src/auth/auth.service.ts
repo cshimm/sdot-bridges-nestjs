@@ -22,7 +22,8 @@ export class AuthService {
       lastName,
       email,
       password,
-      role
+      role,
+      favorites
     } = signUpDto;
     if (await this.userModel.findOne({ email })) {
       throw new HttpException(
@@ -40,6 +41,7 @@ export class AuthService {
       email,
       password: hashedPassword,
       role,
+      favorites
     });
     const token = this.jwtService.sign({
       id: user._id,

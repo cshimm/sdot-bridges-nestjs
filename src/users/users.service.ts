@@ -14,6 +14,7 @@ export class UsersService {
       firstName: user.firstName,
       lastname: user.lastName,
       email: user.email,
+      favorites: user.favorites,
       role: user.role,
     }));
   }
@@ -34,6 +35,7 @@ export class UsersService {
       lastName: user.lastName,
       email: user.email,
       password: user.password,
+      favorites: user.favorites,
       role: user.role,
     } as UserDocument;
   }
@@ -53,13 +55,12 @@ export class UsersService {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      favorites: user.favorites,
       role: user.role,
     } as UserDocument;
   }
 
   async updateUser(id: string, user: UserDocument) {
-    // we may want to check if id is a valid id
-    // if you remove/add a character, it returns a 500 error
     if (user === null) {
       throw new BadRequestException(`Updated User not supplied`);
     }
@@ -80,6 +81,7 @@ export class UsersService {
       firstName: user.firstName,
       lastName: user.lastName,
       email: updatedUser.email,
+      favorites: updatedUser.favorites,
       role: updatedUser.role,
     } as UserDocument;
   }

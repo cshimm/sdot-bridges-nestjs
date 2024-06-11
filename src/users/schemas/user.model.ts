@@ -7,6 +7,7 @@ export interface UserDocument extends Document {
   firstName: string;
   lastName: string;
   password: string;
+  favorites: string[];
   role: Role;
 }
 
@@ -30,6 +31,9 @@ export class User extends Document {
 
   @Prop()
   password: string;
+
+  @Prop()
+  favorites: string[];
 
   @Prop()
   readonly role: Role;

@@ -20,6 +20,8 @@ export class User extends Document {
   password: string;
   @Prop()
   role: Role;
+  @Prop()
+  favorites: string[];
 }
 
 export const UserAuthSchema = SchemaFactory.createForClass(User);
